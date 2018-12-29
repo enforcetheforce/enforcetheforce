@@ -14,11 +14,13 @@ public with sharing class SchemaUtils {
 			Schema.DescribeFieldResult describe = field.getDescribe();
 
 			if( describe.isAccessible() ) {
-				if( describe.isUpdateable() == updateatableOnly  ) {
-					if( (describe.getType() == DisplayType.Reference && includeReferences) || ( describe.getType() != DisplayType.Reference ) ) {
+				if( (updateatableOnly && describe.isUpdateable()) || !updateatableOnly  ) {
+					if( (describe.getType() == DisplayType.Reference && includeReferences) ) {
+						result.put( describe.getName(), describe.getLabel() );
+					} else {
 						result.put( describe.getName(), describe.getLabel() );
 					}
-				}
+				}					
 			}
 		}
 		return result;
