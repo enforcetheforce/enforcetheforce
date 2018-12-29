@@ -1,5 +1,5 @@
 public with sharing class SOQLUtils {
-	
+
 	/**
 	 * getQuery Returns something like Select * FROM
 	 * @param  sObjectName       The SObject name
@@ -14,7 +14,7 @@ public with sharing class SOQLUtils {
 			query += fieldName + ', ';
 		}
 
-		query = query.left( query.length() - 1 );
+		query = query.left( query.length() - 2 );
 		query += ' from ' + sObjectName;
 		return query;
 	}
